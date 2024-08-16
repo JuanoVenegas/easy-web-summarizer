@@ -1,25 +1,41 @@
+Forked from: https://github.com/cobanov/easy-web-summarizer
+
+This fork is for testing purposes and to adapt the tool to use llama3.1 model and translate results to Spanish.
+
+
+----
+
 # Easy Webpage Summarizer
 
 A Python script designed to summarize webpages from specified URLs using the LangChain framework and the ChatOllama model. It leverages advanced language models to generate detailed summaries, making it an invaluable tool for quickly understanding the content of web-based documents.
+
 
 ## Requirements
 
 [ollama](https://ollama.com/) must be installed and served
 
 ```bash
-ollama run llama3:instruct
+curl http://localhost:11434/api/generate -d '{
+  "model": "llama3.1",
+  "prompt": "",
+  "keep_alive": -1,
+}'
+# or
+http POST http://localhost:11434/api/generate model=llama3.1 prompt="" keep_alive=-1s
 ```
 
 ```bash
 pip install -r requirements.txt
 ```
 
+
 ## Features
 
 - Summarization of webpages and youtube videos directly from URLs.
-- Translates to Turkish language (other languages will be added soon!)
+- Translates to Spanish language
 - Integration with LangChain and ChatOllama for state-of-the-art summarization.
 - Command-line interface for easy use and integration into workflows.
+
 
 ## Usage
 
@@ -31,15 +47,17 @@ python summarizer.py -u "http://example.com/document"
 
 Replace `http://example.com/document` with the actual URL of the document you want to summarize.
 
+
 ### Web UI
 
-To use the webpage summarizer in you web browser, you can also try gradio app.
+To use the webpage summarizer in you web browser, you can also try the gradio app.
 
 ```bash
 python app/webui.py
 ```
 
 ![gradio](assets/gradio.png)
+
 
 ## Docker
 
@@ -61,6 +79,7 @@ To contribute to the development of this script, clone the repository, make your
 - [ ] Translate to different languages
 - [ ] Streaming text output on gradio
 - [ ] Serve on web
+
 
 ## License
 

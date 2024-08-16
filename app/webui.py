@@ -13,7 +13,7 @@ def summarize(url):
         llm_chain = setup_summarization_chain()
         result = llm_chain.run(docs)
 
-    return [result, gr.Button("🇹🇷 Translate ", visible=True)]
+    return [result, gr.Button("ES Translate ", visible=True)]
 
 
 def translate(text):
@@ -48,7 +48,7 @@ with gr.Blocks() as demo:
     gr.Markdown(
         """
         ```
-        Model: llama3-8b
+        Model: llama3.1-8b
         Author: Mert Cobanov
         Contact: mertcobanov@gmail.com
         Repo: github.com/mertcobanov/easy-web-summarizer
@@ -57,4 +57,4 @@ with gr.Blocks() as demo:
     btn_generate.click(summarize, inputs=[url], outputs=[summary, btn_translate])
     btn_translate.click(translate, inputs=[summary], outputs=[summary])
 
-demo.launch(server_name="0.0.0.0")
+demo.launch(server_name="127.0.0.1")

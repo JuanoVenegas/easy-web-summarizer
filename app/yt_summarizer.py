@@ -1,5 +1,4 @@
 import re
-
 from langchain.chains.summarize import load_summarize_chain
 from langchain.text_splitter import TokenTextSplitter
 from langchain_community.chat_models import ChatOllama
@@ -25,10 +24,11 @@ def get_transcript(video_link):
 
 
 def split_chunks(transcript):
-
-    splitter = TokenTextSplitter(
-        chunk_size=7500, chunk_overlap=100
-    )  # Llama 3 model takes up to 8192 input tokens, so I set chunk size to 7500 for leaving some space to model.
+    # Llama 3 model takes up to 8192 input tokens, so I set chunk size to 7500 for leaving some space to model.
+    # splitter = TokenTextSplitter(chunk_size=7500, chunk_overlap=100)
+    # With Llama 3.1 though it can be extended to 128k tokens max. Let's use 50k tokens for now.
+    splitter = TokenTextSplitter(chunk_size=50000, chunk_overlap=100)
+    
     chunks = splitter.split_documents(transcript)
     return chunks
 
@@ -53,7 +53,7 @@ def yt_summarization_chain():
         DETAILED SUMMARY:""",
         input_variables=["text"],
     )
-    llm = ChatOllama(model="llama3:instruct", base_url="http://127.0.0.1:11434")
+    llm = ChatOllama(model="llama3.1", base_url="http://127.0.0.1:11434")
     summarize_chain = load_summarize_chain(
         llm=llm, prompt=prompt_template, verbose=True
     )

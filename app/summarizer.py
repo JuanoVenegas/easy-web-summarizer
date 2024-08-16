@@ -1,5 +1,4 @@
 import argparse
-
 from langchain.chains.llm import LLMChain
 from langchain.prompts import PromptTemplate
 from langchain_community.chat_models import ChatOllama
@@ -35,7 +34,7 @@ def setup_summarization_chain():
 
             4. Format the summary in paragraph form for easy understanding.
 
-            5.Conclude your notes with [End of Notes, Message #X] to indicate completion, where "X" represents the total number of messages that I have sent. In other words, include a message counter where you start with #1 and add 1 to the message counter every time I send a message.
+            5. Conclude your notes with [End of Notes, Message #X] to indicate completion, where "X" represents the total number of messages that I have sent. In other words, include a message counter where you start with #1 and add 1 to the message counter every time I send a message.
 
         By following this optimized prompt, you will generate an effective summary that encapsulates the essence of the given text in a clear, detailed, and reader-friendly manner. Optimize output as markdown file.
 
@@ -45,7 +44,7 @@ def setup_summarization_chain():
         input_variables=["text"],
     )
 
-    llm = ChatOllama(model="llama3:instruct", base_url="http://127.0.0.1:11434")
+    llm = ChatOllama(model="llama3.1", base_url="http://127.0.0.1:11434")
     llm_chain = LLMChain(llm=llm, prompt=prompt_template)
     return llm_chain
 
